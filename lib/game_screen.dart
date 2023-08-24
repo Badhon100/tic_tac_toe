@@ -1,9 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:tic_tac_toe/const.dart';
 
-class GameScreen extends StatelessWidget {
+class GameScreen extends StatefulWidget {
   const GameScreen({super.key});
 
+  @override
+  State<GameScreen> createState() => _GameScreenState();
+}
+
+class _GameScreenState extends State<GameScreen> {
+  bool oTurn = true;
+  List<String> displayXO = [
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +43,7 @@ class GameScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () {
-                      print("taaped");
+                      _tapped(index);
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -39,12 +56,11 @@ class GameScreen extends StatelessWidget {
                       ),
                       child: Center(
                         child: Text(
-                          "O",
+                          displayXO[index],
                           style: TextStyle(
-                            fontSize: 64,
-                            fontWeight: FontWeight.bold,
-                            color: Const.primaryColor
-                          ),
+                              fontSize: 64,
+                              fontWeight: FontWeight.bold,
+                              color: Const.primaryColor),
                         ),
                       ),
                     ),
@@ -60,5 +76,16 @@ class GameScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  _tapped(index) {
+    setState(() {
+      if (oTurn && displayXO[index] == '') {
+        displayXO[index] = 'O';
+      } else {
+        displayXO[index] = 'X';
+      }
+      oTurn = !oTurn;
+    });
   }
 }
