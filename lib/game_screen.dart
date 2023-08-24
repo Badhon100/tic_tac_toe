@@ -110,7 +110,7 @@ class _GameScreenState extends State<GameScreen> {
                         child: Center(
                           child: Text(
                             displayXO[index],
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 64,
                                 fontWeight: FontWeight.bold,
                                 color: Const.primaryColor),
